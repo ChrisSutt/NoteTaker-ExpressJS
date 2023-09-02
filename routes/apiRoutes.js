@@ -3,14 +3,14 @@ const fs = require('fs');
 const uniqid = require('uniqid');
 
 module.exports = (app) => {
-
+  // Handle GET request to fetch notes
   app.get('/api/notes', (req, res) => {
     const dbPath = path.join(__dirname, '../db/db.json');
     const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
     res.json(db);
   });
 
-
+  // Handle POST request to create a new note
   app.post('/api/notes', (req, res) => {
     const dbPath = path.join(__dirname, '../db/db.json');
     const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
@@ -26,9 +26,8 @@ module.exports = (app) => {
   
     res.json(userNote);
   });
-  
 
-
+  // Handle DELETE request to delete a note by ID
   app.delete('/api/notes/:id', (req, res) => {
     const dbPath = path.join(__dirname, '../db/db.json');
     const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
