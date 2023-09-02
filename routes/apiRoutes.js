@@ -14,17 +14,19 @@ module.exports = (app) => {
   app.post('/api/notes', (req, res) => {
     const dbPath = path.join(__dirname, '../db/db.json');
     const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-
+  
     const userNote = {
       title: req.body.title,
       text: req.body.text,
       id: uniqid(),
     };
-
+  
     db.push(userNote);
     fs.writeFileSync(dbPath, JSON.stringify(db));
+  
     res.json(userNote);
   });
+  
 
 
   app.delete('/api/notes/:id', (req, res) => {
